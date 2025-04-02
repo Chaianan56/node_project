@@ -28,14 +28,11 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
 
-    - name: Logout from Docker Hub (ป้องกัน session ค้าง)
-      run: docker logout || true  # ใช้ `|| true` กัน error ถ้ายังไม่ได้ login
-
     - name: Log in to Docker Hub
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_ACCESS_TOKEN }}  
+        password: ${{ secrets.DOCKER_PASSWORD }}  
 
     - name: Build Docker image
       run: |
